@@ -16,9 +16,9 @@ spec:
     containers:
       - name: 11519875-mongodb
         image: mongo
-     env:
-	- name: MONGO_INITDB_DATABASE
-	value: database
+        env:
+        - name: MONGO_INITDB_DATABASE
+        value: database
         ports:
           - containerPort: 27017
 
@@ -38,7 +38,7 @@ spec:
        port: 27017
        targetPort: 27017
    selector:
-	deployment-name: 10519875-mongodb
+   deployment-name: 10519875-mongodb
 
 ---
 apiVersion: apps/v1
@@ -59,7 +59,7 @@ spec:
     containers:
       - name: 10519875-api
         image: cab8it148.azurecr.io/10519875-api
-     imagePullPolicy: Always
+    imagePullPolicy: Always
         ports:
           - containerPort: 27017
 

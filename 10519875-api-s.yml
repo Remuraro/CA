@@ -37,8 +37,8 @@ spec:
        protocol: TCP
        port: 27017
        targetPort: 27017
-  selector:
-    deployment-name: 10519875-api-s-mongodb
+       selector:
+       deployment-name: 10519875-api-s-mongodb
 
 ---
 apiVersion: apps/v1
@@ -59,7 +59,7 @@ spec:
     containers:
       - name: 10519875-api-s
         image: cab8it148.azurecr.io/10519875-api-s
-	imagePullPolicy: Always
+        imagePullPolicy: Always
         ports:
           - containerPort: 3000
 
