@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: b8it148azurecrio10519875api 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: b8it148azurecrio10519875api
+  template:
+    metadata:
+      labels:
+        app: b8it148azurecrio10519875api 
+    spec:
+      containers:
+        - name: b8it148azurecrio10519875api 
+          image: cab8it148.azurecr.io/b8it148azurecrio10519875api
+          ports:
+          - containerPort: 3000
