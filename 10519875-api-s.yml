@@ -17,7 +17,7 @@ spec:
       - name: 10519875-mongodb-s
         image: mongo
 	env:
-	  - name: MONGO_INITDB_DATABASE
+	- name: MONGO_INITDB_DATABASE
 	value: database
         ports:
           - containerPort: 27017
