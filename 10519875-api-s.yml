@@ -16,11 +16,11 @@ spec:
     containers:
       - name: 10519875-mongodb-s
         image: mongo
-	env:
-	- name: MONGO_INITDB_DATABASE
-	value: database
-        ports:
-          - containerPort: 27017
+          env: 
+            - name: MONGO_INITDB_DATABASE
+              value: database
+          ports:
+            - containerPort: 27017 
 
 ---
 apiVersion: v1
@@ -37,8 +37,8 @@ spec:
        protocol: TCP
        port: 27017
        targetPort: 27017
-   selector:
-	deployment-name: 10519875-api-s-mongodb
+  selector:
+    deployment-name: 10519875-api-s-mongodb
 
 ---
 apiVersion: apps/v1
