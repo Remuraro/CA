@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+labels:
+  name: 10519875-mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment-name: 10519875-mongodb
+  template:
+    metadata:
+      labels:
+        deployment-name: 10519875-mongodb
+spec:
+    containers:
+      - name: 11519875-mongodb
+        image: mongo
+     env:
+	  - name: MONGO_INITDB_DATABASE
+		value: database
+        ports:
+          - containerPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+   labels:
+     service-label: 10519875-mongodb-cluster
+   name: 10519875-mongodb-cluster-loadbalancer
+      
+spec:
+   type: LoadBalancer
+   ports:
+     - name: 10519875-mongodb-loadbalancer
+       protocol: TCP
+       port: 27017
+       targetPort: 27017
+   selector:
+	deployment-name: 10519875-mongodb
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: 10519875-api
+     
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment-name: 10519875-api
+  template:
+    metadata:
+      labels:
+        deployment-name: 10519875-api
+spec:
+    containers:
+      - name: 10519875-api
+        image: cab8it148.azurecr.io/10519875-api
+     imagePullPolicy: Always
+        ports:
+          - containerPort: 27017
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+labels:
+   service-label: 10519875-api-cluster
+name: 10519875-api-cluster-loadbalancer
+
+spec:
+   type: LoadBalancer
+   ports:
+     - name: 10519875-api-loadbalancer
+       protocol: TCP
+       port: 3000
+       targetPort: 3000
+   selector:
+        deployment-name: 10519875-api

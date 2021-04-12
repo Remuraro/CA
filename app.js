@@ -5,8 +5,10 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 
 console.log(process.argv);
+onsole.log(process.argv);
+var mongoURL = process.arg[4]; //'mongodb://localhost:27017/ca-db'; 'mongodb:/ca-mongodb-cluster-service-loadbalancer/database'
 
-mongoose.connect("mongodb://localhost:27017/ca-db", {useNewUrlParser: true}).then(()=>{
+mongoose.connect(mongoURL, {useNewUrlParser: true}).then(()=>{  // updated the connection var for MongoDB
     const app = express();
     app.use(session({
         secret : "caAPISecret",
@@ -14,7 +16,7 @@ mongoose.connect("mongodb://localhost:27017/ca-db", {useNewUrlParser: true}).the
         resave: false
     }));
     app.use(express.json());
-    app.use(cors({credentials: true, origin: process.argv[2]}));
+    app.use(cors({credentials: true, origin: [process.argv[2], process.argv[3]]})); // whitelisted the localhost ports for frontend, Karma and MongoDB (arg 2= localhost 4200, arg 3= localhost 9876 mongodb, arg 4= localhost 27017 ca-db)
     app.use("/api", routes);
     
     app.listen(3000, ()=>{
