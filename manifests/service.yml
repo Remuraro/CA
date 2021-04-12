@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: b8it148azurecrio10519875api
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 3000 
+    selector:
+        app: b8it148azurecrio10519875api
