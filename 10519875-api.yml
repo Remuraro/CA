@@ -1,8 +1,7 @@
 apiVersion: apps/v1
-
-kind: Deployment
-metadata:
-labels:
+ kind: Deployment
+ metadata:
+ labels:
   name: 10519875-mongodb
 spec:
   replicas: 1
@@ -18,7 +17,7 @@ spec:
       - name: 11519875-mongodb
         image: mongo
         env:
-        - name: MONGO_INITDB_DATABASE
+            - name: MONGO_INITDB_DATABASE
         value: database
         ports:
           - containerPort: 27017

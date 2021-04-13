@@ -12,15 +12,15 @@ spec:
     metadata:
       labels:
         deployment-name: 10519875-mongodb-s
-spec:
-    containers:
+    spec:
+      containers:
       - name: 10519875-mongodb-s
         image: mongo
-          env:
-            - name: MONGO_INITDB_DATABASE
-              value: database
-          ports:
-            - containerPort: 27017 
+        env:
+        - name: MONGO_INITDB_DATABASE
+        value: database
+        ports:
+        - containerPort: 27017 
 
 ---
 apiVersion: v1
@@ -55,7 +55,7 @@ spec:
     metadata:
       labels:
         deployment-name: 10519875-api-s
-spec:
+    spec:
     containers:
       - name: 10519875-api-s
         image: cab8it148.azurecr.io/10519875-api-s
