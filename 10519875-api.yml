@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 10519875-mongodb
+  name: rm10519875-mongodb
 spec:
   replicas: 1
   selector:
