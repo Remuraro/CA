@@ -1,45 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rm10519875-mongodb-s
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      deployment-name: rm10519875-mongodb-s
-  template:
-    metadata:
-      labels:
-        deployment-name: rm10519875-mongodb-s
-    spec:
-      containers:
-        - name: rm10519875-mongodb-s
-          image: mongo
-          env:
-            - name: MONGO_INITDB_DATABASE
-              value: database
-          ports:
-            - containerPort: 27017 
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    service-label: rm10519875-mongodb-s-cluster-service
-  name: rm10519875-mongodb-s-cluster-service-loadbalancer
-spec:
-  type: LoadBalancer
-  ports:
-    - name: rm10519875-mongodb-s-loadbalancer-service-port
-      port: 27017
-      targetPort: 27017
-      protocol: TCP
-  selector:
-    deployment-name: rm10519875-s-mongodb
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
   name: 10519875-api-s  
 spec:
   replicas: 1
@@ -88,3 +49,42 @@ spec:
     protocol: TCP
   selector:
     deployment-name: 10519875-api-s
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rm10519875-mongodb-s
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment-name: rm10519875-mongodb-s
+  template:
+    metadata:
+      labels:
+        deployment-name: rm10519875-mongodb-s
+    spec:
+      containers:
+        - name: rm10519875-mongodb-s
+          image: mongo
+          env:
+            - name: MONGO_INITDB_DATABASE
+              value: database
+          ports:
+            - containerPort: 27017 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: rm10519875-mongodb-s-cluster-service
+  name: rm10519875-mongodb-s-cluster-service-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+    - name: rm10519875-mongodb-s-loadbalancer-service-port
+      port: 27017
+      targetPort: 27017
+      protocol: TCP
+  selector:
+    deployment-name: rm10519875-s-mongodb
