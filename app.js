@@ -1,4 +1,4 @@
-const express = require("express");
+/*const express = require("express");
 const cors = require('cors');
 const session = require("express-session");
 const mongoose = require("mongoose");
@@ -22,9 +22,9 @@ mongoose.connect(mongoURL, {useNewUrlParser: true}).then(()=>{  // updated the c
     app.listen(3000, ()=>{
         console.log("CA API started on port 3000, test using http://localhost:3000");
     });
-})
+})*/
 
-/*const express = require("express");
+const express = require("express");
 const cors = require('cors');
 const session = require("express-session");
 const mongoose = require("mongoose");
@@ -46,4 +46,4 @@ mongoose.connect("mongodb://localhost:27017/ca-db", {useNewUrlParser: true}).the
     app.listen(3000, ()=>{
         console.log("CA API started on port 3000, test using http://localhost:3000");
     });
-});*/
+});
