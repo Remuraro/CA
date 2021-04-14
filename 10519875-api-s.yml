@@ -31,11 +31,11 @@ spec:
   type: LoadBalancer
   ports:
     - name: rm10519875-mongodb-s-loadbalancer-service-port
-      protocol: TCP
       port: 27017
       targetPort: 27017
+      protocol: TCP
   selector:
-    deployment-name: rm10519875-api-s-mongodb
+    deployment-name: rm10519875-s-mongodb
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -84,7 +84,7 @@ spec:
   type: ClusterIP
   ports:
   - name: rm10519875-api-s-cluster-service-port
-    port: 80
+    port: 3000
     protocol: TCP
   selector:
     deployment-name: 10519875-api-s
