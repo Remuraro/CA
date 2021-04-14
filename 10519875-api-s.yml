@@ -67,9 +67,24 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - name: rm10519875-api-s-loadbalancer
-    protocol: TCP
+  - name: rm10519875-api-s-loadbalancer-service-port
     port: 3000
     targetPort: 3000
+    protocol: TCP
+  selector:
+    deployment-name: 10519875-api-s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: rm10519875-api-s-cluster-service
+  name: rm10519875-api-s-cluster-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: rm10519875-api-s-cluster-service-port
+    port: 80
+    protocol: TCP
   selector:
     deployment-name: 10519875-api-s
