@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const routes = require("./routes");
 
 console.log(process.argv);
-onsole.log(process.argv);
+console.log(process.argv);
 var mongoURL = process.arg[4]; //'mongodb://localhost:27017/ca-db'; 'mongodb:/ca-mongodb-cluster-service-loadbalancer/database'
 
 mongoose.connect(mongoURL, {useNewUrlParser: true}).then(()=>{  // updated the connection var for MongoDB
