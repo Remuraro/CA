@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: 10519875-api-s  
 spec:
+  progressDeadlineSeconds: 900
   replicas: 1
   selector:
     matchLabels:
@@ -18,37 +19,6 @@ spec:
         imagePullPolicy: Always
         ports:
           - containerPort: 3000
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    service-label: rm10519875-api-s-cluster-service
-  name: rm10519875-api-s-cluster-service-loadbalancer
-spec:
-  type: LoadBalancer
-  ports:
-  - name: rm10519875-api-s-loadbalancer-service-port
-    port: 3000
-    targetPort: 3000
-    protocol: TCP
-  selector:
-    deployment-name: 10519875-api-s
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    service-label: rm10519875-api-s-cluster-service
-  name: rm10519875-api-s-cluster-service
-spec:
-  type: ClusterIP
-  ports:
-  - name: rm10519875-api-s-cluster-service-port
-    port: 3000
-    protocol: TCP
-  selector:
-    deployment-name: 10519875-api-s
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -88,3 +58,34 @@ spec:
       protocol: TCP
   selector:
     deployment-name: rm10519875-s-mongodb
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: rm10519875-api-s-cluster-service
+  name: rm10519875-api-s-cluster-service-loadbalancer
+spec:
+  type: LoadBalancer
+  ports:
+  - name: rm10519875-api-s-loadbalancer-service-port
+    port: 3000
+    targetPort: 3000
+    protocol: TCP
+  selector:
+    deployment-name: 10519875-api-s
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service-label: rm10519875-api-s-cluster-service
+  name: rm10519875-api-s-cluster-service
+spec:
+  type: ClusterIP
+  ports:
+  - name: rm10519875-api-s-cluster-service-port
+    port: 3000
+    protocol: TCP
+  selector:
+    deployment-name: 10519875-api-s
